@@ -42,7 +42,9 @@ class EntrustRole
 		}
 
 		if ($this->auth->guest() || !$request->user()->hasRole($roles)) {
-			abort(403);
+			return Response::json([
+              'message' => 'not_authorized',
+            ], 403);
 		}
 
 		return $next($request);

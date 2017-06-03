@@ -42,7 +42,9 @@ class EntrustPermission
 		}
 
 		if ($this->auth->guest() || !$request->user()->can($permissions)) {
-			abort(403);
+			return Response::json([
+              'message' => 'not_authorized',
+            ], 403);
 		}
 
 		return $next($request);
