@@ -52,7 +52,9 @@ class EntrustAbility
 		}
 
 		if ($this->auth->guest() || !$request->user()->ability($roles, $permissions, [ 'validate_all' => $validateAll ])) {
-			abort(403);
+			return Response::json([
+              'message' => 'not_authorized'
+            ], 403);
 		}
 
 		return $next($request);
